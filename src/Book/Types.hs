@@ -1,6 +1,6 @@
 {-# LANGUAGE DeriveGeneric #-}
 
-module BookParser.Types
+module Book.Types
   ( Chapter
   ) where
 

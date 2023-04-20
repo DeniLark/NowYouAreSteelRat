@@ -25,8 +25,8 @@ source-repository head
 
 library
   exposed-modules:
-      BookParser.Book
-      BookParser.Types
+      Book.Book
+      Book.Types
       Bot.Bot
       Bot.BotToken
   other-modules:
