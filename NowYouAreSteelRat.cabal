@@ -27,8 +27,11 @@ library
   exposed-modules:
       Book.Book
       Book.Types
+      Bot.Action
       Bot.Bot
       Bot.BotToken
+      Bot.Handlers
+      Bot.Model
   other-modules:
       Paths_NowYouAreSteelRat
   hs-source-dirs:
