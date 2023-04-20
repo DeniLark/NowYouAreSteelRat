@@ -1,0 +1,36 @@
+[
+  {
+    "chapterId": 0,
+    "type": "simple | allPaths",
+    "text": [
+      "Chapter Text",
+      "Chapter Text"
+    ],
+    "nextChapters": [
+      {
+        "nextChapterId": 0,
+        "nextChapterText": "Next Chapter"
+      },
+      {
+        "nextChapterId": 0,
+        "nextChapterText": "Next Chapter"
+      }
+    ]
+  },
+  {
+    "chapterId": 5,
+    "type": "random",
+    "text": [
+      "Ты попал! Но если Роббин Гут тоже, то ты проиграл.",
+      "Ты смотришь на его мишень. Ура! Он промахнулся!",
+      "Счет равный: два-два."
+    ],
+    "nextChaptersRandom": {
+      "nextRandomChapterText": "Окажешься на [343] или на [342].",
+      "nextRandomChapters": [
+        343,
+        342
+      ]
+    }
+  }
+]
