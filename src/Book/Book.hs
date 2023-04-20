@@ -3,7 +3,7 @@ module Book.Book where
 import           Data.Aeson
 import qualified Data.ByteString               as B
 
-import           Book.Types
+import           Book.Types.Chapter
 
 pathBook :: FilePath
 pathBook = "./book/chapters/"

@@ -26,6 +26,9 @@ dependencies:
   - text
   - telegram-bot-simple
 
+default-extensions:
+  - DeriveGeneric
+
 ghc-options:
   - -Wall
   - -Wcompat

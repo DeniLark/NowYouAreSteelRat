@@ -10,7 +10,7 @@ import           Bot.Handlers
 import           Bot.Model
 
 initialBot :: BotApp Model Action
-initialBot = BotApp { botInitialModel = Model
+initialBot = BotApp { botInitialModel = Model []
                     , botAction       = flip handleUpdate
                     , botHandler      = handleAction
                     , botJobs         = []

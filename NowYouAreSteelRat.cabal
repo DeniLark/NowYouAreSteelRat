@@ -26,7 +26,10 @@ source-repository head
 library
   exposed-modules:
       Book.Book
-      Book.Types
+      Book.Types.Chapter
+      Book.Types.NextChapter
+      Book.Types.NextRandomChapter
+      Book.Types.TypeChapter
       Bot.Action
       Bot.Bot
       Bot.BotToken
@@ -36,6 +39,8 @@ library
       Paths_NowYouAreSteelRat
   hs-source-dirs:
       src
+  default-extensions:
+      DeriveGeneric
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       aeson
@@ -51,6 +56,8 @@ executable NowYouAreSteelRat-exe
       Paths_NowYouAreSteelRat
   hs-source-dirs:
       app
+  default-extensions:
+      DeriveGeneric
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       NowYouAreSteelRat
@@ -68,6 +75,8 @@ test-suite NowYouAreSteelRat-test
       Paths_NowYouAreSteelRat
   hs-source-dirs:
       test
+  default-extensions:
+      DeriveGeneric
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       NowYouAreSteelRat
