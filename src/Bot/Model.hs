@@ -1,8 +1,10 @@
 module Bot.Model where
 
 
-import           Book.Types.Chapter             ( Chapter )
+import           Book.Types.Book
 
 data Model = Model
-  { modelBook :: [Chapter]
+  { modelBook      :: Book
+  , currentChapter :: Int
   }
+  deriving Show

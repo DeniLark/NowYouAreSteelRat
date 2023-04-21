@@ -1,7 +1,9 @@
 module Book.Types.Chapter where
 
 import           Data.Aeson
+import           Data.Maybe
 import           Data.Text                      ( Text )
+import qualified Data.Text                     as T
 import           GHC.Generics                   ( Generic )
 
 import           Book.Types.NextChapter
@@ -18,6 +20,17 @@ data Chapter = Chapter
   }
   deriving (Generic, Show)
 
+chapterFieldsMod :: String -> String
+chapterFieldsMod "typeChapter" = "type"
+chapterFieldsMod s             = s
+
 instance FromJSON Chapter where
   parseJSON =
     genericParseJSON defaultOptions { fieldLabelModifier = chapterFieldsMod }
+
+textChapter :: Chapter -> Text
+textChapter chapter =
+  T.unlines $ T.pack (show $ chapterId chapter) : text chapter
+
+justNextChapters :: Chapter -> [NextChapter]
+justNextChapters = fromJust . nextChapters

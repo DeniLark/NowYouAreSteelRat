@@ -9,16 +9,23 @@ import           Bot.BotToken                   ( getTokenFromEnvOrCLI )
 import           Bot.Handlers
 import           Bot.Model
 
-initialBot :: BotApp Model Action
-initialBot = BotApp { botInitialModel = Model []
-                    , botAction       = flip handleUpdate
-                    , botHandler      = handleAction
-                    , botJobs         = []
-                    }
+import           Book.IOTests
+import           Telegram.Bot.Simple.Debug      ( traceBotDefault )
+
+initialBot :: IO (BotApp Model Action)
+initialBot = do
+  book <- getBookTest
+  pure $ BotApp { botInitialModel = Model book 66
+                , botAction       = flip handleUpdate
+                , botHandler      = handleAction
+                , botJobs         = []
+                }
 
 run :: IO ()
 run = do
-  token <- getTokenFromEnvOrCLI
-  env   <- Telegram.defaultTelegramClientEnv token
-  startBot_ initialBot env
+  token   <- getTokenFromEnvOrCLI
+  env     <- Telegram.defaultTelegramClientEnv token
+  initBot <- initialBot
+  -- startBot_ (traceBotDefault initBot) env
+  startBot_ initBot env
 

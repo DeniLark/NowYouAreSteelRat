@@ -26,6 +26,7 @@ dependencies:
   - text
   - telegram-bot-simple
   - containers
+  - mtl
 
 default-extensions:
   - DeriveGeneric

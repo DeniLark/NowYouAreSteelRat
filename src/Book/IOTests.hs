@@ -1,3 +1,4 @@
+{-# LANGUAGE ScopedTypeVariables #-}
 module Book.IOTests where
 
 import           Data.Aeson
