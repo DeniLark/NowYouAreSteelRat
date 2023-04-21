@@ -10,7 +10,7 @@ import           Book.Types.Chapter
 
 
 getBookTest :: IO Book
-getBookTest = listChapterToBook <$> getChaptersFromFile "chapter66_74.json"
+getBookTest = listChapterToBook <$> getChaptersFromFile "chapter0_11.json"
 
 getChaptersTest' :: IO ()
 getChaptersTest' = do

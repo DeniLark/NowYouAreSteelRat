@@ -6,17 +6,14 @@ import           Data.Text                      ( Text )
 import qualified Data.Text                     as T
 import           GHC.Generics                   ( Generic )
 
-import           Book.Types.NextChapter
-import           Book.Types.NextRandomChapter
 import           Book.Types.TypeChapter
 
 
 data Chapter = Chapter
-  { chapterId          :: Int
-  , typeChapter        :: Maybe Type -- Nothing == Simple
-  , text               :: [Text]
-  , nextChapters       :: Maybe [NextChapter]
-  , nextChaptersRandom :: Maybe NextRandomChapter
+  { chapterId    :: Int
+  , typeChapter  :: Maybe Type -- Nothing == Simple
+  , text         :: [Text]
+  , nextChapters :: [Int]
   }
   deriving (Generic, Show)
 
@@ -32,5 +29,5 @@ textChapter :: Chapter -> Text
 textChapter chapter =
   T.unlines $ T.pack (show $ chapterId chapter) : text chapter
 
-justNextChapters :: Chapter -> [NextChapter]
-justNextChapters = fromJust . nextChapters
+justNextChapters :: Chapter -> [Int]
+justNextChapters = nextChapters

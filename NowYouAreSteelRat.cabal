@@ -29,8 +29,6 @@ library
       Book.IOTests
       Book.Types.Book
       Book.Types.Chapter
-      Book.Types.NextChapter
-      Book.Types.NextRandomChapter
       Book.Types.TypeChapter
       Bot.Action
       Bot.Bot

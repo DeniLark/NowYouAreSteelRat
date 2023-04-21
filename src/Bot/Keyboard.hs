@@ -1,11 +1,11 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Bot.Keyboard where
 
-import           Book.Types.NextChapter
 import           Data.Text                      ( Text )
+import qualified Data.Text                     as T
 import qualified Telegram.Bot.API              as Telegram
 
-keyboardSimpleChapter :: [NextChapter] -> Telegram.ReplyKeyboardMarkup
+keyboardSimpleChapter :: [Int] -> Telegram.ReplyKeyboardMarkup
 keyboardSimpleChapter chapters = Telegram.ReplyKeyboardMarkup
   { Telegram.replyKeyboardMarkupKeyboard           = buttons
   , Telegram.replyKeyboardMarkupResizeKeyboard     = Just True
@@ -16,7 +16,7 @@ keyboardSimpleChapter chapters = Telegram.ReplyKeyboardMarkup
  where
   buttons :: [[Telegram.KeyboardButton]]
   buttons =
-    (pure . addKeyboardButton . nextChapterText <$> chapters)
+    (pure . addKeyboardButton . T.pack . show <$> chapters)
       <> [["Prev", "Next"]]
 
 

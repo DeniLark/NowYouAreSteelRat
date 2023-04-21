@@ -15,7 +15,7 @@ import           Telegram.Bot.Simple.Debug      ( traceBotDefault )
 initialBot :: IO (BotApp Model Action)
 initialBot = do
   book <- getBookTest
-  pure $ BotApp { botInitialModel = Model book 66
+  pure $ BotApp { botInitialModel = Model book 0
                 , botAction       = flip handleUpdate
                 , botHandler      = handleAction
                 , botJobs         = []
