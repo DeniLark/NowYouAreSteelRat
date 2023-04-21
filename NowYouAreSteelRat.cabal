@@ -25,7 +25,9 @@ source-repository head
 
 library
   exposed-modules:
-      Book.Book
+      Book.IO
+      Book.IOTests
+      Book.Types.Book
       Book.Types.Chapter
       Book.Types.NextChapter
       Book.Types.NextRandomChapter
@@ -46,6 +48,7 @@ library
       aeson
     , base >=4.7 && <5
     , bytestring
+    , containers
     , telegram-bot-simple
     , text
   default-language: Haskell2010
@@ -64,6 +67,7 @@ executable NowYouAreSteelRat-exe
     , aeson
     , base >=4.7 && <5
     , bytestring
+    , containers
     , telegram-bot-simple
     , text
   default-language: Haskell2010
@@ -83,6 +87,7 @@ test-suite NowYouAreSteelRat-test
     , aeson
     , base >=4.7 && <5
     , bytestring
+    , containers
     , telegram-bot-simple
     , text
   default-language: Haskell2010
