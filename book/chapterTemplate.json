@@ -1,20 +1,14 @@
 [
   {
     "chapterId": 0,
-    "type": "simple | allPaths",
+    "type": "simple | allPaths | final",
     "text": [
       "Chapter Text",
       "Chapter Text"
     ],
     "nextChapters": [
-      {
-        "nextChapterId": 0,
-        "nextChapterText": "Next Chapter"
-      },
-      {
-        "nextChapterId": 0,
-        "nextChapterText": "Next Chapter"
-      }
+      0,
+      1
     ]
   },
   {

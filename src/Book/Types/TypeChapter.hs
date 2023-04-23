@@ -4,7 +4,7 @@ import           Data.Aeson
 import           Data.Char                      ( toLower )
 import           GHC.Generics                   ( Generic )
 
-data Type = Simple | Random | AllPaths
+data Type = Simple | Random | AllPaths | Final
   deriving (Generic, Show)
 
 lowerFirst :: String -> String
