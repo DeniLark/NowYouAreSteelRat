@@ -12,10 +12,10 @@ pathBook :: FilePath
 pathBook = "./book/chapters/"
 
 getBook :: IO Book
-getBook = listChapterToBook <$> getAllChapter
+getBook = listChapterToBook <$> getAllChapters
 
-getAllChapter :: IO [Chapter]
-getAllChapter = do
+getAllChapters :: IO [Chapter]
+getAllChapters = do
   filePaths <- listDirectory pathBook
   foldMap getChaptersFromFile filePaths
 
