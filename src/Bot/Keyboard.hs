@@ -15,10 +15,7 @@ keyboardSimpleChapter chapters = Telegram.ReplyKeyboardMarkup
   }
  where
   buttons :: [[Telegram.KeyboardButton]]
-  buttons =
-    (pure . addKeyboardButton . T.pack . show <$> chapters)
-      <> [["Prev", "Next"]]
-
+  buttons = pure . addKeyboardButton . T.pack . show <$> chapters
 
 addKeyboardButton :: Text -> Telegram.KeyboardButton
 addKeyboardButton text = Telegram.KeyboardButton

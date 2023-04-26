@@ -17,9 +17,7 @@ import           Bot.Action
 import           Bot.Keyboard                   ( keyboardSimpleChapter )
 import           Bot.Model
 import           Control.Monad                  ( when )
-import           Data.Either                    ( fromRight
-                                                , isLeft
-                                                )
+import           Data.Bool                      ( bool )
 
 
 handleUpdate :: Model -> Telegram.Update -> Maybe Action
@@ -58,18 +56,12 @@ handleAction (Reply userId msg) model = do
       chapter              = lookupChapter chapterInt $ modelBook model
       possibleNextChapters = nextChapters chapter
       eitherInt            = fst <$> (decimal :: Reader Int) msg
-      newModel             = creatNewModel msg (fromRight 0 eitherInt)
+      maybeInt             = either
+        (const Nothing)
+        (\a -> bool Nothing (Just a) $ a `elem` possibleNextChapters)
+        eitherInt
+      newModel = maybe model (flip (newCurrentChapter userId) model) maybeInt
   eff $ do
-    when
-      (  isLeft eitherInt
-      || (fromRight 0 eitherInt `notElem` possibleNextChapters)
-      )
-      (replyText "Неверный ввод")
+    when (isNothing maybeInt) (replyText "Неверный ввод")
   eff $ pure $ ShowChapter userId
   pure newModel
- where
-  creatNewModel "Next" _ =
-    newCurrentChapter userId (currentChapter userId model + 1) model
-  creatNewModel "Prev" _ =
-    newCurrentChapter userId (currentChapter userId model - 1) model
-  creatNewModel _ num = newCurrentChapter userId num model
