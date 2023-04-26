@@ -27,6 +27,7 @@ dependencies:
   - telegram-bot-simple
   - containers
   - mtl
+  - directory
 
 default-extensions:
   - DeriveGeneric
