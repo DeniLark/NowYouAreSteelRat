@@ -5,10 +5,14 @@ import           Data.Aeson
 import qualified Data.ByteString               as B
 import           System.Directory
 
+import           Book.Types.Book
 import           Book.Types.Chapter
 
 pathBook :: FilePath
 pathBook = "./book/chapters/"
+
+getBook :: IO Book
+getBook = listChapterToBook <$> getAllChapter
 
 getAllChapter :: IO [Chapter]
 getAllChapter = do

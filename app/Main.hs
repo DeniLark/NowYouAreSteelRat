@@ -5,5 +5,5 @@ module Main
 import           Bot.Bot
 
 main :: IO ()
-main = run
+main = putStrLn "App start" >> run
 

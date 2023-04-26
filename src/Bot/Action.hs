@@ -1,9 +1,10 @@
 module Bot.Action where
 
+import           Bot.Model
 import           Data.Text                      ( Text )
 
 data Action = NoAction
-            | Start
+            | Start UserId
             -- | ViewChapter
-            | Reply Text
+            | Reply UserId Text
   deriving Show
