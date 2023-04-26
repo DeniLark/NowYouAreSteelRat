@@ -28,6 +28,7 @@ dependencies:
   - containers
   - mtl
   - directory
+  - random
 
 default-extensions:
   - DeriveGeneric

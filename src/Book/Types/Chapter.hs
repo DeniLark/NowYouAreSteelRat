@@ -29,5 +29,12 @@ textChapter :: Chapter -> Text
 textChapter chapter =
   T.unlines $ T.pack (show $ chapterId chapter) : text chapter
 
+isChapterRandom :: Chapter -> Bool
+isChapterRandom chapter | justTypeChapter chapter == Random = True
+                        | otherwise                         = False
+
+justTypeChapter :: Chapter -> Type
+justTypeChapter = fromMaybe Simple . typeChapter
+
 justNextChapters :: Chapter -> [Int]
 justNextChapters = nextChapters

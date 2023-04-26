@@ -5,6 +5,7 @@ import           Data.Maybe
 
 import           Book.IO
 import           Book.Types.Book                ( Book )
+import           Book.Types.Chapter             ( Chapter )
 
 type UserId = Integer
 
@@ -19,8 +20,12 @@ initialModel = do
   book <- getBook
   pure $ Model book M.empty
 
-currentChapter :: UserId -> Model -> Int
-currentChapter userId = fromMaybe 0 . M.lookup userId . modelCurrentChapter
+currentChapter :: UserId -> Model -> Chapter
+currentChapter userId model =
+  fromJust $ M.lookup (currentChapterInt userId model) $ modelBook model
+
+currentChapterInt :: UserId -> Model -> Int
+currentChapterInt userId = fromMaybe 0 . M.lookup userId . modelCurrentChapter
 
 newCurrentChapter :: UserId -> Int -> Model -> Model
 newCurrentChapter userId newChapter model = model

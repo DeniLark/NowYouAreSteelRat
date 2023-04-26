@@ -5,7 +5,7 @@ import           Data.Char                      ( toLower )
 import           GHC.Generics                   ( Generic )
 
 data Type = Simple | Random | AllPaths | Final
-  deriving (Generic, Show)
+  deriving (Generic, Show, Eq)
 
 lowerFirst :: String -> String
 lowerFirst ""       = ""
