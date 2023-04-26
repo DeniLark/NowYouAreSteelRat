@@ -5,6 +5,6 @@ import           Data.Text                      ( Text )
 
 data Action = NoAction
             | Start UserId
-            -- | ViewChapter
+            | ShowChapter UserId
             | Reply UserId Text
   deriving Show
