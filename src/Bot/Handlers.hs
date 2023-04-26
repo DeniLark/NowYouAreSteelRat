@@ -2,7 +2,6 @@
 module Bot.Handlers where
 
 import           Control.Applicative
-import           Control.Monad.Trans            ( liftIO )
 import           Data.Maybe
 import           Data.Text.Read
 import qualified Telegram.Bot.API              as Telegram
@@ -30,11 +29,20 @@ handleUpdate _ update = parseUpdate parser update
   userId = Telegram.userId user
   Telegram.UserId userIdInteger = userId
   parser =
-    (Start userIdInteger <$ command "start") <|> (Reply userIdInteger <$> text)
+    (Start userIdInteger <$ command "start")
+      <|> (Prev userIdInteger <$ command "prev")
+      <|> (Next userIdInteger <$ command "next")
+      <|> (Reply userIdInteger <$> text)
 
 
 handleAction :: Action -> Model -> Eff Action Model
-handleAction NoAction             model = pure model
+handleAction NoAction model = pure model
+handleAction (Prev userId) model =
+  newCurrentChapter userId (currentChapter userId model - 1) model
+    <# pure (ShowChapter userId)
+handleAction (Next userId) model =
+  newCurrentChapter userId (currentChapter userId model + 1) model
+    <# pure (ShowChapter userId)
 handleAction (Start       userId) model = model <# pure (ShowChapter userId)
 handleAction (ShowChapter userId) model = model <# do
   let chapter = lookupChapter (currentChapter userId model) $ modelBook model

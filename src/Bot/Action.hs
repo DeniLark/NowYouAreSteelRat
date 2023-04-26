@@ -4,6 +4,8 @@ import           Bot.Model
 import           Data.Text                      ( Text )
 
 data Action = NoAction
+            | Prev UserId
+            | Next UserId
             | Start UserId
             | ShowChapter UserId
             | Reply UserId Text
