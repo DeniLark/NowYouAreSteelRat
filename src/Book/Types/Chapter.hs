@@ -10,10 +10,10 @@ import           Book.Types.TypeChapter
 
 
 data Chapter = Chapter
-  { chapterId    :: Int
-  , typeChapter  :: Maybe Type -- Nothing == Simple
-  , text         :: [Text]
-  , nextChapters :: [Int]
+  { chapterId           :: Int
+  , chapterType         :: Maybe Type -- Nothing == Simple
+  , chapterText         :: [Text]
+  , chapterNextChapters :: [Int]
   }
   deriving (Generic, Show)
 
@@ -27,14 +27,12 @@ instance FromJSON Chapter where
 
 textChapter :: Chapter -> Text
 textChapter chapter =
-  T.unlines $ T.pack (show $ chapterId chapter) : text chapter
+  T.unlines $ T.pack (show $ chapterId chapter) : chapterText chapter
 
 isChapterRandom :: Chapter -> Bool
 isChapterRandom chapter | justTypeChapter chapter == Random = True
                         | otherwise                         = False
 
 justTypeChapter :: Chapter -> Type
-justTypeChapter = fromMaybe Simple . typeChapter
+justTypeChapter = fromMaybe Simple . chapterType
 
-justNextChapters :: Chapter -> [Int]
-justNextChapters = nextChapters

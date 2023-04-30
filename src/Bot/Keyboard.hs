@@ -21,11 +21,11 @@ keyboardSimpleChapter chapter = Telegram.ReplyKeyboardMarkup
   buttons :: Chapter -> [[Telegram.KeyboardButton]]
   buttons ch
     | justTypeChapter ch == Random
-    = pure $ pure $ addKeyboardButton $ textForRandom $ justNextChapters ch
+    = pure $ pure $ addKeyboardButton $ textForRandom $ chapterNextChapters ch
     | otherwise
     = chunksOf 4 -- 4 кнопки в ряду 
       $   (addKeyboardButton . T.pack . show)
-      <$> justNextChapters ch
+      <$> chapterNextChapters ch
 
 textForRandom :: [Int] -> Text
 textForRandom = T.intercalate " или " . map (T.pack . show)

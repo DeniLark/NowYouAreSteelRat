@@ -9,16 +9,13 @@ import           Telegram.Bot.Simple
 import           Telegram.Bot.Simple.UpdateParser
 
 import           Book.Types.Book
-import           Book.Types.Chapter             ( Chapter(nextChapters)
+import           Book.Types.Chapter             ( Chapter(chapterNextChapters)
                                                 , isChapterRandom
-                                                , justNextChapters
-                                                , justTypeChapter
                                                 , textChapter
                                                 )
 import           Bot.Action
 import           Bot.Keyboard                   ( keyboardSimpleChapter )
 import           Bot.Model
-import           Control.Monad                  ( when )
 import           Control.Monad.IO.Class         ( MonadIO(liftIO) )
 import           Data.Bool                      ( bool )
 import           System.Random
@@ -60,7 +57,7 @@ handleAction (NewChapter userId newChapter) model =
 handleAction (Reply userId msg) model = do
   let chapterInt           = currentChapterInt userId model
       chapter              = lookupChapter chapterInt $ modelBook model
-      possibleNextChapters = nextChapters chapter
+      possibleNextChapters = chapterNextChapters chapter
       eitherInt            = fst <$> (decimal :: Reader Int) msg
       maybeInt             = either
         (const Nothing)
