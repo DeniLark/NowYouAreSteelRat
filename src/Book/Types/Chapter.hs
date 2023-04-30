@@ -18,8 +18,10 @@ data Chapter = Chapter
   deriving (Generic, Show)
 
 chapterFieldsMod :: String -> String
-chapterFieldsMod "typeChapter" = "type"
-chapterFieldsMod s             = s
+chapterFieldsMod "chapterType"         = "type"
+chapterFieldsMod "chapterText"         = "text"
+chapterFieldsMod "chapterNextChapters" = "nextChapters"
+chapterFieldsMod s                     = s
 
 instance FromJSON Chapter where
   parseJSON =
