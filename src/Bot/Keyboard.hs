@@ -1,6 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Bot.Keyboard where
 
+import           Data.List.Split
 import           Data.Text                      ( Text )
 import qualified Data.Text                     as T
 import qualified Telegram.Bot.API              as Telegram
@@ -19,10 +20,12 @@ keyboardSimpleChapter chapter = Telegram.ReplyKeyboardMarkup
  where
   buttons :: Chapter -> [[Telegram.KeyboardButton]]
   buttons ch
-    | justTypeChapter ch == Simple
-    = pure . addKeyboardButton . T.pack . show <$> justNextChapters ch
-    | otherwise
+    | justTypeChapter ch == Random
     = pure $ pure $ addKeyboardButton $ textForRandom $ justNextChapters ch
+    | otherwise
+    = chunksOf 4 -- 4 кнопки в ряду 
+      $   (addKeyboardButton . T.pack . show)
+      <$> justNextChapters ch
 
 textForRandom :: [Int] -> Text
 textForRandom = T.intercalate " или " . map (T.pack . show)

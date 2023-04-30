@@ -29,6 +29,7 @@ dependencies:
   - mtl
   - directory
   - random
+  - split
 
 default-extensions:
   - DeriveGeneric
