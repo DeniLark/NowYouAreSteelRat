@@ -4,7 +4,7 @@ import           Bot.Model
 import           Data.Text                      ( Text )
 
 data Action = NoAction
-            | NewChapter UserId Int
+            | NewChapter UserId Int Bool
             | Prev UserId
             | Next UserId
             | Start UserId

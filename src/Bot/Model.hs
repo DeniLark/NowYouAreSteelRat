@@ -10,15 +10,29 @@ import           Book.Types.Chapter             ( Chapter )
 type UserId = Integer
 
 data Model = Model
-  { modelBook           :: Book
-  , modelCurrentChapter :: M.Map UserId Int
+  { modelBook            :: Book
+  , modelCurrentChapter  :: M.Map UserId Int
+  , modelAllPathsVisited :: M.Map UserId [Int]
   }
   deriving Show
+
+getPathVisited :: UserId -> Model -> [Int]
+getPathVisited userId = fromMaybe [] . M.lookup userId . modelAllPathsVisited
+
+addPathVisited :: UserId -> Int -> Model -> Model
+addPathVisited userId numChapter model = model
+  { modelAllPathsVisited = M.insert userId
+                                    (numChapter : oldList)
+                                    mapAllPathsVisited
+  }
+ where
+  mapAllPathsVisited = modelAllPathsVisited model
+  oldList            = fromMaybe [] $ M.lookup userId mapAllPathsVisited
 
 initialModel :: IO Model
 initialModel = do
   book <- getBook
-  pure $ Model book M.empty
+  pure $ Model book M.empty M.empty
 
 currentChapter :: UserId -> Model -> Chapter
 currentChapter userId model =

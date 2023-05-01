@@ -35,6 +35,10 @@ isChapterRandom :: Chapter -> Bool
 isChapterRandom chapter | justTypeChapter chapter == Random = True
                         | otherwise                         = False
 
+isChapterAllPaths :: Chapter -> Bool
+isChapterAllPaths chapter | justTypeChapter chapter == AllPaths = True
+                          | otherwise                           = False
+
 justTypeChapter :: Chapter -> Type
 justTypeChapter = fromMaybe Simple . chapterType
 
