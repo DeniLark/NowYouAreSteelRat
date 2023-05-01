@@ -50,7 +50,7 @@ handleAction (Next userId) model =
   newCurrentChapter userId (currentChapterInt userId model + 1) model
     <# pure (ShowChapter userId)
 handleAction (Start userId) model = -- обнуляет прогресс
-  newCurrentChapter userId 0 model <# pure (ShowChapter userId)
+  resetProgress userId model <# pure (ShowChapter userId)
 
 handleAction (ShowChapter userId) model = model <# do
   let chapter = currentChapter userId model

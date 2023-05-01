@@ -16,6 +16,12 @@ data Model = Model
   }
   deriving Show
 
+resetProgress :: UserId -> Model -> Model
+resetProgress userId model = model
+  { modelCurrentChapter  = M.insert userId 0 $ modelCurrentChapter model
+  , modelAllPathsVisited = M.insert userId [] $ modelAllPathsVisited model
+  }
+
 getPathVisited :: UserId -> Model -> [Int]
 getPathVisited userId = fromMaybe [] . M.lookup userId . modelAllPathsVisited
 
