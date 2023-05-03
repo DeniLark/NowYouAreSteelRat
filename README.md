@@ -6,7 +6,7 @@
 ## Запуск
 Перед запуском:
 - должен быть установлен [Haskell Stack](https://docs.haskellstack.org/en/stable/install_and_upgrade/)
-- Получен бот токен от [BotFather](https://t.me/BotFather), установить переменную окружения TELEGRAM_BOT_TOKEN со значением токена 
+- получен бот токен от [BotFather](https://t.me/BotFather), установить переменную окружения TELEGRAM_BOT_TOKEN со значением токена 
 
 
 1. Скачать этот репозиторий
