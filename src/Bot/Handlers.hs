@@ -2,7 +2,6 @@
 module Bot.Handlers where
 
 import           Control.Applicative
-import           Control.Monad
 import           Data.Maybe
 import qualified Data.Text                     as T
 import           Data.Text.Read
@@ -16,15 +15,14 @@ import           Book.Types.Chapter             ( Chapter(chapterNextChapters)
                                                 , isChapterRandom
                                                 , textChapter
                                                 )
+import           Control.Monad.IO.Class         ( MonadIO(liftIO) )
+import           System.Random
+
 import           Bot.Action
 import           Bot.Keyboard                   ( intsToKeyboard
                                                 , keyboardChapter
                                                 )
 import           Bot.Model
-import           Control.Monad                  ( when )
-import           Control.Monad.IO.Class         ( MonadIO(liftIO) )
-import           Data.Bool                      ( bool )
-import           System.Random
 
 
 handleUpdate :: Model -> Telegram.Update -> Maybe Action
@@ -35,20 +33,12 @@ handleUpdate _ update = parseUpdate parser update
   Telegram.UserId userIdInteger = userId
   parser =
     (Start userIdInteger <$ command "start")
-      <|> (Prev userIdInteger <$ command "prev")
-      <|> (Next userIdInteger <$ command "next")
       <|> callbackQueryDataRead
       <|> (Reply userIdInteger <$> text)
 
 
 handleAction :: Action -> Model -> Eff Action Model
 handleAction NoAction model = pure model
-handleAction (Prev userId) model =
-  newCurrentChapter userId (currentChapterInt userId model - 1) model
-    <# pure (ShowChapter userId)
-handleAction (Next userId) model =
-  newCurrentChapter userId (currentChapterInt userId model + 1) model
-    <# pure (ShowChapter userId)
 handleAction (Start userId) model = -- обнуляет прогресс
   resetProgress userId model <# pure (ShowChapter userId)
 

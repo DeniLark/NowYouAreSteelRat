@@ -5,8 +5,6 @@ import           Data.Text                      ( Text )
 
 data Action = NoAction
             | NewChapter UserId Int Bool
-            | Prev UserId
-            | Next UserId
             | Start UserId
             | ShowChapter UserId
             | Reply UserId Text
