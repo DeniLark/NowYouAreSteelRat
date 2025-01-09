@@ -9,5 +9,5 @@ import           Telegram.Bot.Simple            ( getEnvToken )
 
 getTokenFromEnvOrCLI :: IO Telegram.Token
 getTokenFromEnvOrCLI =
-  getEnvToken "TELEGRAM_BOT_TOKEN"
+  getEnvToken "NOW_YOU_ARE_STEEL_RAT__BOT_TOKEN"
     <|> (putStrLn "Input your token: " >> (Telegram.Token <$> T.getLine))
